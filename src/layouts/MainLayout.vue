@@ -1,106 +1,107 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
+    <AppHeader @toggleDrawer="toggleLeftDrawer"/>
+    <DesktopMenu
+      v-if="!$q.screen.lt.sm"
+      v-model:isOpen="leftDrawerOpen"
+      :links="linksList"
+    />
 
     <q-page-container>
-      <router-view />
+      <router-view/>
     </q-page-container>
+
+    <MobileMenu v-if="$q.screen.lt.sm" :menuItems="menuItems"/>
   </q-layout>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import {ref} from "vue";
+import {useQuasar} from "quasar";
+import AppHeader from "components/layout/AppHeader.vue";
+import DesktopMenu from "components/layout/DesktopMenu.vue";
+import MobileMenu from "components/layout/MobileMenu.vue";
 
-defineOptions({
-  name: 'MainLayout'
-})
+const $q = useQuasar();
+
+const leftDrawerOpen = ref(false);
+
+function toggleLeftDrawer() {
+  leftDrawerOpen.value = !leftDrawerOpen.value;
+}
+
+const menuItems = [
+  {
+    title: "Dashboard",
+    icon: "dashboard",
+    link: "/dashboard",
+  },
+  {
+    title: "Livestock",
+    icon: "pets",
+    link: "/livestock",
+  },
+  {
+    title: "Health",
+    icon: "healing",
+    link: "/health",
+  },
+];
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: "Dashboard",
+    caption: "Livestock Overview",
+    icon: "dashboard",
+    link: "/dashboard",
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    title: "Livestock",
+    caption: "Manage Livestock",
+    icon: "pets",
+    link: "/livestock",
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    title: "Feeding",
+    caption: "Feeding Schedules",
+    icon: "restaurant",
+    link: "/feeding",
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+    title: "Health",
+    caption: "Health Records",
+    icon: "healing",
+    link: "/health",
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
+    title: "Breeding",
+    caption: "Breeding Program",
+    icon: "favorite",
+    link: "/breeding",
   },
   {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
+    title: "Nutrition",
+    caption: "Nutrition Management",
+    icon: "eco",
+    link: "/nutrition",
   },
   {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
-const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
+    title: "Veterinary",
+    caption: "Veterinary Care",
+    icon: "local_hospital",
+    link: "/veterinary",
+  },
+  {
+    title: "Reports",
+    caption: "Generate Reports",
+    icon: "assessment",
+    link: "/reports",
+  },
+  {
+    title: "Notifications",
+    caption: "View Alerts",
+    icon: "notifications",
+    link: "/notifications",
+  },
+];
 </script>
