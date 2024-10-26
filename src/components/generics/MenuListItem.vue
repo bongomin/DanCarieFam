@@ -8,7 +8,7 @@
     v-bind="$attrs"
   >
     <q-item-section v-if="icon" avatar>
-      <q-icon :name="icon" :color="iconColor" />
+      <q-icon :name="icon" :color="iconColor"/>
     </q-item-section>
 
     <q-item-section>
