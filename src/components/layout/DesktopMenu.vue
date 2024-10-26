@@ -11,7 +11,7 @@
       userEmail="bongomindaniel@gmail.com"
     />
 
-    <q-separator color="white" />
+    <q-separator color="white"/>
 
     <q-list>
       <MenuListItem
@@ -27,12 +27,29 @@
         caption-class="text-white-8"
       />
     </q-list>
+
+    <q-item
+      clickable
+      v-ripple
+      @click="handleLogout"
+      class="text-white absolute-bottom q-mt-lg"
+    >
+      <q-item-section avatar>
+        <q-icon name="logout" color="accent"/>
+      </q-item-section>
+      <q-item-section>
+        <q-item-label class="text-weight-bold">Logout</q-item-label>
+      </q-item-section>
+    </q-item>
   </q-drawer>
 </template>
 
 <script setup>
 import MenuListItem from "src/components/generics/MenuListItem.vue";
 import UserProfileSection from "src/components/layout/UserProfileSection.vue";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
 
 defineProps({
   isOpen: {
@@ -46,4 +63,9 @@ defineProps({
 });
 
 defineEmits(["update:isOpen"]);
+
+const handleLogout = () => {
+  localStorage.removeItem('authToken');
+  router.push('/');
+};
 </script>
