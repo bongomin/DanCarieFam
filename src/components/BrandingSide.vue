@@ -1,5 +1,5 @@
 <template>
-  <div class="branding-side col-12 col-md-6 flex flex-center bg-primary">
+  <div class="branding-side col-12 col-md-6 flex flex-center bg-primary gt-sm">
     <div class="text-white text-center q-pa-md">
       <img
         src="~assets/images/goat2.png"
