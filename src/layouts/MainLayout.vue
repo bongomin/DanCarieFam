@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <AppHeader @toggleDrawer="toggleLeftDrawer"/>
+    <AppHeader @toggleDrawer="toggleLeftDrawer" />
     <DesktopMenu
       v-if="!$q.screen.lt.sm"
       v-model:isOpen="leftDrawerOpen"
@@ -8,19 +8,21 @@
     />
 
     <q-page-container>
-      <router-view/>
+      <router-view />
     </q-page-container>
 
-    <MobileMenu v-if="$q.screen.lt.sm" :menuItems="menuItems"/>
+    <MobileMenu v-if="$q.screen.lt.sm" :menuItems="menuItems" />
+    <AppFooter v-if="!$q.screen.lt.sm" />
   </q-layout>
 </template>
 
 <script setup>
-import {ref} from "vue";
-import {useQuasar} from "quasar";
+import { ref } from "vue";
+import { useQuasar } from "quasar";
 import AppHeader from "components/layout/AppHeader.vue";
 import DesktopMenu from "components/layout/DesktopMenu.vue";
 import MobileMenu from "components/layout/MobileMenu.vue";
+import AppFooter from "components/layout/AppFooter.vue";
 
 const $q = useQuasar();
 
