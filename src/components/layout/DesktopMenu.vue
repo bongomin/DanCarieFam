@@ -31,7 +31,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
 import MenuListItem from "src/components/generics/MenuListItem.vue";
 import UserProfileSection from "src/components/layout/UserProfileSection.vue";
 
